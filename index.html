@@ -2,75 +2,103 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Golden King - Sistema</title>
+  <title>Animal POS - Golden King</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- HEADER -->
-  <div class="header">
+  <!-- ---------- LOGIN ---------- -->
+  <div class="login-card" id="loginCard">
+    <h2>Iniciar Sesión</h2>
+    <input type="text" id="username" placeholder="Usuario">
+    <input type="password" id="password" placeholder="Contraseña">
+    <button id="loginBtn">Ingresar</button>
+  </div>
+
+  <!-- ---------- HEADER ---------- -->
+  <div class="header" style="display:none;" id="mainHeader">
     <h1>Golden King</h1>
-    
-    <!-- BOTONES NUEVOS -->
+    <!-- NUEVOS BOTONES -->
     <div class="header-buttons">
       <button id="animalitosBtn">Animalitos</button>
       <button id="pollaHipicaBtn">Polla Hípica</button>
     </div>
   </div>
 
-  <!-- SECCIONES -->
+  <!-- ---------- MAIN ---------- -->
+  <div class="main" style="display:none;" id="mainContent">
 
-  <!-- ANIMALITOS -->
-  <div class="animales-section">
-    <div class="animales">
-      <!-- Lista completa de animales -->
-      <div class="animal">00 Ballena</div>
-      <div class="animal">0 Delfín</div>
-      <div class="animal">01 Carnero</div>
-      <div class="animal">02 Toro</div>
-      <div class="animal">03 Ciempiés</div>
-      <div class="animal">04 Alacrán</div>
-      <div class="animal">05 León</div>
-      <div class="animal">06 Sapo</div>
-      <div class="animal">07 Loro</div>
-      <div class="animal">08 Ratón</div>
-      <div class="animal">09 Águila</div>
-      <div class="animal">10 Tigre</div>
-      <div class="animal">11 Gato</div>
-      <div class="animal">12 Caballo</div>
-      <div class="animal">13 Mono</div>
-      <div class="animal">14 Paloma</div>
-      <div class="animal">15 Zorro</div>
-      <div class="animal">16 Oso</div>
-      <div class="animal">17 Pavo</div>
-      <div class="animal">18 Burro</div>
-      <div class="animal">19 Pescado</div>
-      <div class="animal">20 Caimán</div>
-      <div class="animal">21 Gallo</div>
-      <div class="animal">22 Camello</div>
-      <div class="animal">23 Cebra</div>
-      <div class="animal">24 Iguana</div>
-      <div class="animal">25 Gallina</div>
-      <div class="animal">26 Vaca</div>
-      <div class="animal">27 Perro</div>
-      <div class="animal">28 Zamuro</div>
-      <div class="animal">29 Elefante</div>
-      <div class="animal">30 Caimán</div>
-      <div class="animal">31 Lapa</div>
-      <div class="animal">32 Ardilla</div>
-      <div class="animal">33 Pato</div>
-      <div class="animal">34 Venado</div>
-      <div class="animal">35 Jirafa</div>
-      <div class="animal">36 Culebra</div>
+    <!-- ---------- ANIMALITOS ---------- -->
+    <div class="animales-section">
+      <div class="animales">
+        <!-- Aquí se generan los animales desde app.js -->
+      </div>
     </div>
-  </div>
 
-  <!-- POLLA HÍPICA -->
-  <div class="polla-hipica-section" style="display:none;">
-    <p>Contenido de Polla Hípica</p>
-    <!-- Aquí agregarás tablas o entradas de Polla Hípica -->
+    <!-- ---------- POLLA HÍPICA ---------- -->
+    <div class="polla-hipica-section" style="display:none;">
+      <p>Contenido de Polla Hípica</p>
+    </div>
+
+    <!-- ---------- TICKET ---------- -->
+    <div class="card ticket">
+      <h3>Ticket</h3>
+      <div class="table"></div>
+      <div class="total">Total: 0</div>
+      <button id="processTicket">Procesar e Imprimir</button>
+    </div>
+
   </div>
 
   <script src="app.js"></script>
+  <script>
+    // -------- LOGIN FUNCIONAL CON ENTER Y SESSION ----------
+    const loginBtn = document.getElementById("loginBtn");
+    const loginCard = document.getElementById("loginCard");
+    const mainHeader = document.getElementById("mainHeader");
+    const mainContent = document.getElementById("mainContent");
+    const usernameInput = document.getElementById("username");
+
+    // Función para mostrar el main
+    function mostrarMain(user) {
+      loginCard.style.display = "none";
+      mainHeader.style.display = "flex";
+      mainContent.style.display = "grid";
+      // Guardar sesión en localStorage
+      localStorage.setItem("loggedInUser", user);
+    }
+
+    // Verificar si ya hay sesión activa
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    if (loggedInUser) {
+      mostrarMain(loggedInUser);
+    }
+
+    // Login al hacer click
+    loginBtn.addEventListener("click", () => {
+      const user = usernameInput.value.trim();
+      if (user) mostrarMain(user);
+      else alert("Ingrese un usuario válido");
+    });
+
+    // Login con Enter
+    usernameInput.addEventListener("keyup", (e) => {
+      if (e.key === "Enter") loginBtn.click();
+    });
+    document.getElementById("password").addEventListener("keyup", (e) => {
+      if (e.key === "Enter") loginBtn.click();
+    });
+
+    // Función para cerrar sesión (opcional)
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      loginCard.style.display = "block";
+      mainHeader.style.display = "none";
+      mainContent.style.display = "none";
+      usernameInput.value = "";
+      document.getElementById("password").value = "";
+    }
+    // Puedes añadir un botón "Salir" y llamar a logout()
+  </script>
 </body>
 </html>
