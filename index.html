@@ -18,26 +18,37 @@
   <!-- ---------- HEADER ---------- -->
   <div class="header" style="display:none;" id="mainHeader">
     <h1>Golden King</h1>
-    <!-- NUEVOS BOTONES -->
     <div class="header-buttons">
-      <button id="animalitosBtn">Animalitos</button>
-      <button id="pollaHipicaBtn">Polla Hípica</button>
+      <button id="animalitosTab">Animalitos</button>
+      <button id="numerosTab">Números</button>
+      <button id="combinacionTab">Combinación</button>
+      <button id="pollaTab">Polla</button>
     </div>
   </div>
 
   <!-- ---------- MAIN ---------- -->
   <div class="main" style="display:none;" id="mainContent">
 
-    <!-- ---------- ANIMALITOS ---------- -->
+    <!-- ---------- SECCIÓN ANIMALITOS ---------- -->
     <div class="animales-section">
       <div class="animales">
-        <!-- Aquí se generan los animales desde app.js -->
+        <!-- Los animales se generan dinámicamente desde app.js -->
       </div>
     </div>
 
-    <!-- ---------- POLLA HÍPICA ---------- -->
-    <div class="polla-hipica-section" style="display:none;">
-      <p>Contenido de Polla Hípica</p>
+    <!-- ---------- SECCIÓN NUMEROS ---------- -->
+    <div class="numeros-section" style="display:none;">
+      <p>Sección Números</p>
+    </div>
+
+    <!-- ---------- SECCIÓN COMBINACIÓN ---------- -->
+    <div class="combinacion-section" style="display:none;">
+      <p>Sección Combinación</p>
+    </div>
+
+    <!-- ---------- SECCIÓN POLLA ---------- -->
+    <div class="polla-section" style="display:none;">
+      <p>Sección Polla</p>
     </div>
 
     <!-- ---------- TICKET ---------- -->
@@ -52,53 +63,30 @@
 
   <script src="app.js"></script>
   <script>
-    // -------- LOGIN FUNCIONAL CON ENTER Y SESSION ----------
+    // ---------- LOGIN ----------
     const loginBtn = document.getElementById("loginBtn");
     const loginCard = document.getElementById("loginCard");
     const mainHeader = document.getElementById("mainHeader");
     const mainContent = document.getElementById("mainContent");
+
     const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
 
-    // Función para mostrar el main
-    function mostrarMain(user) {
-      loginCard.style.display = "none";
-      mainHeader.style.display = "flex";
-      mainContent.style.display = "grid";
-      // Guardar sesión en localStorage
-      localStorage.setItem("loggedInUser", user);
-    }
-
-    // Verificar si ya hay sesión activa
-    const loggedInUser = localStorage.getItem("loggedInUser");
-    if (loggedInUser) {
-      mostrarMain(loggedInUser);
-    }
-
-    // Login al hacer click
     loginBtn.addEventListener("click", () => {
       const user = usernameInput.value.trim();
-      if (user) mostrarMain(user);
-      else alert("Ingrese un usuario válido");
+      const pass = passwordInput.value.trim();
+      if (user && pass) {
+        loginCard.style.display = "none";
+        mainHeader.style.display = "flex";
+        mainContent.style.display = "grid";
+      } else {
+        alert("Ingrese usuario y contraseña");
+      }
     });
 
-    // Login con Enter
-    usernameInput.addEventListener("keyup", (e) => {
-      if (e.key === "Enter") loginBtn.click();
-    });
-    document.getElementById("password").addEventListener("keyup", (e) => {
-      if (e.key === "Enter") loginBtn.click();
-    });
-
-    // Función para cerrar sesión (opcional)
-    function logout() {
-      localStorage.removeItem("loggedInUser");
-      loginCard.style.display = "block";
-      mainHeader.style.display = "none";
-      mainContent.style.display = "none";
-      usernameInput.value = "";
-      document.getElementById("password").value = "";
-    }
-    // Puedes añadir un botón "Salir" y llamar a logout()
+    // Permitir login con Enter
+    usernameInput.addEventListener("keyup", (e) => { if(e.key==="Enter") loginBtn.click(); });
+    passwordInput.addEventListener("keyup", (e) => { if(e.key==="Enter") loginBtn.click(); });
   </script>
 </body>
 </html>
