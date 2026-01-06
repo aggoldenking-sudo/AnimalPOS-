@@ -31,7 +31,7 @@
     <!-- ---------- SECCIÓN ANIMALITOS ---------- -->
     <div class="animales-section">
       <div class="animales">
-        <!-- Animales generados dinámicamente -->
+        <!-- Los animales se generan dinámicamente desde app.js -->
       </div>
     </div>
 
@@ -50,6 +50,7 @@
 
   </div>
 
+  <!-- ---------- JS ---------- -->
   <script src="app.js"></script>
   <script>
     // ---------- LOGIN ESTÁTICO ----------
@@ -82,6 +83,26 @@
 
     usuarioInput.addEventListener("keyup", e => { if(e.key==="Enter") login(); });
     claveInput.addEventListener("keyup", e => { if(e.key==="Enter") login(); });
+
+    // ---------- SWITCH SECCIONES ----------
+    const animalitosTab = document.getElementById("animalitosTab");
+    const pollaHipicaTab = document.getElementById("pollaHipicaTab");
+    const animalesSection = document.querySelector(".animales-section");
+    const pollaHipicaSection = document.querySelector(".polla-hipica-section");
+
+    animalitosTab.addEventListener("click", () => {
+      animalesSection.style.display = "block";
+      pollaHipicaSection.style.display = "none";
+      animalitosTab.classList.add("active");
+      pollaHipicaTab.classList.remove("active");
+    });
+
+    pollaHipicaTab.addEventListener("click", () => {
+      animalesSection.style.display = "none";
+      pollaHipicaSection.style.display = "block";
+      animalitosTab.classList.remove("active");
+      pollaHipicaTab.classList.add("active");
+    });
   </script>
 </body>
 </html>
