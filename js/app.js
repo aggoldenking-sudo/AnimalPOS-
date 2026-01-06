@@ -1,6 +1,6 @@
 /* ---------- BOTONES HEADER ---------- */
-const animalitosBtn = document.getElementById("animalitosBtn");
-const pollaHipicaBtn = document.getElementById("pollaHipicaBtn");
+const animalitosBtn = document.getElementById("animalitosTab");
+const pollaHipicaBtn = document.getElementById("pollaHipicaTab");
 
 // SECCIONES
 const animalitosSection = document.querySelector(".animales-section");
@@ -10,11 +10,15 @@ const pollaHipicaSection = document.querySelector(".polla-hipica-section");
 animalitosBtn.addEventListener("click", () => {
   animalitosSection.style.display = "block";
   pollaHipicaSection.style.display = "none";
+  animalitosBtn.classList.add("active");
+  pollaHipicaBtn.classList.remove("active");
 });
 
 pollaHipicaBtn.addEventListener("click", () => {
   animalitosSection.style.display = "none";
   pollaHipicaSection.style.display = "block";
+  pollaHipicaBtn.classList.add("active");
+  animalitosBtn.classList.remove("active");
 });
 
 /* ---------- LISTA DE ANIMALES ---------- */
@@ -59,18 +63,16 @@ const animales = [
   { numero: "36", nombre: "Culebra" }
 ];
 
-/* ---------- GENERAR ANIMALES EN LA SECCIÓN ---------- */
+/* ---------- GENERAR ANIMALES ---------- */
 const animalesContainer = document.querySelector(".animales-section .animales");
-
-// Limpiar y crear divs de animales
 animalesContainer.innerHTML = "";
+
 animales.forEach(animal => {
   const div = document.createElement("div");
   div.classList.add("animal");
   div.textContent = `${animal.numero} ${animal.nombre}`;
   animalesContainer.appendChild(div);
 
-  // Click para seleccionar
   div.addEventListener("click", () => {
     const monto = prompt(`Ingrese el monto para ${animal.nombre} (${animal.numero}):`);
     if (monto && !isNaN(monto)) {
@@ -82,9 +84,8 @@ animales.forEach(animal => {
 });
 
 /* ---------- TICKET ---------- */
-const ticketContainer = document.createElement("div");
-ticketContainer.classList.add("ticket");
-document.body.appendChild(ticketContainer);
+const ticketContainer = document.querySelector(".ticket .table");
+const totalDiv = document.querySelector(".ticket .total");
 
 function agregarTicket(numero, nombre, monto) {
   const div = document.createElement("div");
@@ -100,12 +101,5 @@ function actualizarTotal() {
     const match = texto.match(/\$([0-9\.]+)/);
     if (match) total += parseFloat(match[1]);
   });
-
-  let totalDiv = ticketContainer.querySelector(".total");
-  if (!totalDiv) {
-    totalDiv = document.createElement("div");
-    totalDiv.classList.add("total");
-    ticketContainer.appendChild(totalDiv);
-  }
   totalDiv.textContent = `Total: $${total}`;
 }
