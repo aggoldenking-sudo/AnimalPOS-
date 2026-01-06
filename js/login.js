@@ -1,4 +1,4 @@
-const USUARIO = "Golden King";
+const USUARIO = "golden";
 const CLAVE = "1234";
 
 function login() {
