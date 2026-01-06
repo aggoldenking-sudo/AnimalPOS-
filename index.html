@@ -1,196 +1,63 @@
-/* ---------- RESET ---------- */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: "Segoe UI", Tahoma, sans-serif;
-  background: #0f172a;
-  color: #fff;
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Animal POS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-/* ---------- LOGIN ---------- */
-.login-card {
-  width: 300px;
-  margin: 100px auto;
-  background: #020617;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 0 10px #000;
-}
-.login-card h2 {
-  margin-bottom: 20px;
-}
-.login-card input {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 8px;
-  border: 1px solid #444;
-  background: #0f172a;
-  color: #fff;
-}
-.login-card button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 8px;
-  background: #f97316;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-}
+<!-- LOGIN -->
+<div id="loginScreen" class="login-card">
+  <h2>Animal POS Login</h2>
+  <input type="text" id="usuarioInput" placeholder="Usuario">
+  <input type="password" id="claveInput" placeholder="Clave">
+  <button onclick="login()">Ingresar</button>
+</div>
 
-/* ---------- HEADER ---------- */
-.header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  background: #020617;
-  border-bottom: 1px solid #444;
-}
-.header button {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 10px;
-  background: #f97316;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-}
+<!-- PANTALLA PRINCIPAL -->
+<div id="mainScreen" style="display:none;">
+  <div class="header">
+    <button onclick="salir()">Salir</button>
+    <span id="userLabel">Usuario: </span>
+    <span id="userTicket" style="margin-left:auto;">Golden King</span>
+    <span id="numeroTicket" style="margin-left:10px;">TCK# 000000000</span>
+  </div>
 
-/* ---------- MAIN ---------- */
-.main {
-  display: grid;
-  grid-template-columns: 1.5fr 2fr 1.5fr;
-  gap: 12px;
-  padding: 12px;
-  height: calc(100vh - 60px);
-}
+  <div class="main">
+    <div class="card" id="sorteos"></div>
 
-/* ---------- CARD ---------- */
-.card {
-  background: #1e293b;
-  border-radius: 14px;
-  padding: 14px;
-  overflow: auto;
-}
+    <div class="card">
+      <div class="tabs">
+        <button class="active">Animalitos</button>
+        <button>Números</button>
+        <button>Combinación</button>
+        <button>Polla</button>
+      </div>
+      <div class="animales" id="animales"></div>
+      <input id="animalInput" placeholder="Animales seleccionados" readonly>
+      <input id="montoInput" type="number" placeholder="Monto">
+      <button onclick="agregar()">Agregar</button>
+    </div>
 
-/* ---------- SORTEOS ---------- */
-.sorteo h4 {
-  margin-bottom: 6px;
-  color: #f97316;
-}
-.horarios {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-.horarios button {
-  padding: 6px 12px;
-  border-radius: 20px;
-  border: 1px solid #ddd;
-  background: #fff;
-  color: #000;
-  cursor: pointer;
-}
-.horarios button.active {
-  background: #f97316;
-  color: #fff;
-  border: none;
-}
+    <div class="card ticket">
+      <div class="table" id="tabla">
+        <div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;font-weight:bold;">
+          <div>Animal</div><div>Lotería</div><div>Hora</div><div>Monto</div>
+        </div>
+      </div>
+      <div class="total" id="total">TOTAL BS 0</div>
+      <button style="background:#22c55e;" onclick="procesar()">Procesar e Imprimir</button>
+    </div>
+  </div>
+</div>
 
-/* ---------- TABS ---------- */
-.tabs {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-.tabs button {
-  padding: 6px 12px;
-  border-radius: 20px;
-  border: 1px solid #ddd;
-  background: #fff;
-  color: #000;
-  cursor: pointer;
-}
-.tabs .active {
-  background: #f97316;
-  color: #fff;
-  border: none;
-}
+<div id="printTicket" style="display:none;"></div>
 
-/* ---------- ANIMALES ---------- */
-.animales {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  gap: 10px;
-  margin-bottom: 10px;
-}
-.animal {
-  border: 1px solid #f97316;
-  border-radius: 10px;
-  padding: 8px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
-}
-.animal.active {
-  background: #f97316;
-  color: #fff;
-}
-
-/* ---------- INPUT Y BOTONES ---------- */
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 4px 0;
-  border-radius: 8px;
-  border: 1px solid #444;
-  background: #0f172a;
-  color: #fff;
-}
-.card button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  font-size: 15px;
-  cursor: pointer;
-  margin-top: 6px;
-}
-.card button:hover {
-  opacity: 0.9;
-}
-
-/* ---------- TICKET ---------- */
-.ticket .table div {
-  display: grid;
-  grid-template-columns: 2fr 2fr 1fr 1fr;
-  padding: 6px 0;
-  border-bottom: 1px dashed #444;
-  font-size: 14px;
-}
-.ticket .total {
-  margin-top: 10px;
-  font-weight: 700;
-  font-size: 16px;
-  text-align: right;
-}
-
-/* ---------- PRINT ---------- */
-@media print {
-  body * { visibility: hidden; }
-  #printTicket, #printTicket * { visibility: visible; }
-  #printTicket {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    background: #fff;
-    color: #000;
-    padding: 20px;
-  }
-  button { display: none; }
-}
+<script src="data/animales.js"></script>
+<script src="data/sorteos.js"></script>
+<script src="js/login.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
