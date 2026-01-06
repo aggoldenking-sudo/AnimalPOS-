@@ -21,7 +21,7 @@ const animales = [
   { numero: "17", nombre: "Pavo" },
   { numero: "18", nombre: "Burro" },
   { numero: "19", nombre: "Pescado" },
-  { numero: "20", nombre: "Caimán" },
+  { numero: "20", nombre: "Cochino" },
   { numero: "21", nombre: "Gallo" },
   { numero: "22", nombre: "Camello" },
   { numero: "23", nombre: "Cebra" },
@@ -31,7 +31,7 @@ const animales = [
   { numero: "27", nombre: "Perro" },
   { numero: "28", nombre: "Zamuro" },
   { numero: "29", nombre: "Elefante" },
-  { numero: "30", nombre: "Caimán" }, // a veces Cochino/Cerdo según la banca
+  { numero: "30", nombre: "Caimán" }, 
   { numero: "31", nombre: "Lapa" },
   { numero: "32", nombre: "Ardilla" },
   { numero: "33", nombre: "Pato" },
