@@ -8,160 +8,189 @@ body {
 
 /* ---------- LOGIN ---------- */
 .login-card {
-  width: 320px;
-  margin: 120px auto;
-  background: #111827;
-  padding: 25px;
-  border-radius: 16px;
+  width: 300px;
+  margin: 100px auto;
+  background: #020617;
+  padding: 20px;
+  border-radius: 12px;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-  transition: transform 0.3s;
+  box-shadow: 0 0 10px #000;
 }
-.login-card:hover { transform: scale(1.02); }
-
-.login-card h2 { margin-bottom: 20px; color: #f97316; }
+.login-card h2 {
+  margin-bottom: 20px;
+}
 .login-card input {
   width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 10px;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
   border: 1px solid #444;
-  background: #1e293b;
+  background: #0f172a;
   color: #fff;
-  transition: 0.3s;
-}
-.login-card input:focus {
-  border: 1px solid #f97316;
-  outline: none;
-  box-shadow: 0 0 8px #f97316;
 }
 .login-card button {
   width: 100%;
   padding: 12px;
-  margin-top: 12px;
+  margin-top: 10px;
   border: none;
-  border-radius: 10px;
-  background: linear-gradient(90deg,#f97316,#fb923c);
+  border-radius: 8px;
+  background: #f97316;
   color: #fff;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
 }
-.login-card button:hover { opacity: 0.9; }
 
 /* ---------- HEADER ---------- */
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 12px 20px;
-  background: linear-gradient(90deg,#111827,#1f2937);
+  gap: 10px;
+  padding: 10px;
+  background: #020617;
   border-bottom: 1px solid #444;
 }
-.header h1 { color: #f97316; font-size: 22px; font-weight: bold; }
-
-/* ---------- HEADER BOTONES ---------- */
-.header-buttons { display: flex; gap: 12px; }
-.header-buttons button {
-  padding: 8px 16px;
-  border-radius: 12px;
+.header button {
+  padding: 8px 12px;
   border: none;
-  background: #1f2937;
-  color: #f97316;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-  transition: 0.3s;
-}
-.header-buttons button:hover,
-.header-buttons button.active {
+  border-radius: 10px;
   background: #f97316;
   color: #fff;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 /* ---------- MAIN ---------- */
 .main {
   display: grid;
-  grid-template-columns: 2fr 1.5fr;
-  gap: 16px;
-  padding: 16px;
-  height: calc(100vh - 70px);
+  grid-template-columns: 1.5fr 2fr 1.5fr;
+  gap: 12px;
+  padding: 12px;
+  height: calc(100vh - 60px);
 }
 
 /* ---------- CARD ---------- */
 .card {
   background: #1e293b;
-  border-radius: 16px;
-  padding: 16px;
+  border-radius: 14px;
+  padding: 14px;
   overflow: auto;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+}
+
+/* ---------- SORTEOS ---------- */
+.sorteo h4 {
+  margin-bottom: 6px;
+  color: #f97316;
+}
+.horarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.horarios button {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+}
+.horarios button.active {
+  background: #f97316;
+  color: #fff;
+  border: none;
+}
+
+/* ---------- TABS ---------- */
+.tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.tabs button {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+}
+.tabs .active {
+  background: #f97316;
+  color: #fff;
+  border: none;
 }
 
 /* ---------- ANIMALES ---------- */
-.animales-section { display: block; margin-top: 12px; }
-.animales { display: grid; grid-template-columns: repeat(auto-fill,minmax(90px,1fr)); gap: 12px; }
+.animales {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
 .animal {
-  border-radius: 12px;
-  padding: 10px;
+  border: 1px solid #f97316;
+  border-radius: 10px;
+  padding: 8px;
   text-align: center;
   cursor: pointer;
   font-size: 14px;
-  background: #111827;
-  border: 1px solid #444;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-  transition: 0.3s;
 }
-.animal:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.6); }
-.animal.active { background: #f97316; color: #fff; }
-
-/* ---------- POLLA HÍPICA ---------- */
-.polla-hipica-section {
-  display: none;
-  margin-top: 12px;
-  background: #1e293b;
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+.animal.active {
+  background: #f97316;
+  color: #fff;
 }
 
 /* ---------- INPUT Y BOTONES ---------- */
 input {
   width: 100%;
-  padding: 12px;
-  margin: 6px 0;
-  border-radius: 10px;
+  padding: 10px;
+  margin: 4px 0;
+  border-radius: 8px;
   border: 1px solid #444;
-  background: #1e293b;
+  background: #0f172a;
   color: #fff;
-  transition: 0.3s;
-}
-input:focus {
-  border: 1px solid #f97316;
-  box-shadow: 0 0 6px #f97316;
-  outline: none;
 }
 .card button {
   width: 100%;
   padding: 12px;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 15px;
   cursor: pointer;
-  margin-top: 8px;
-  background: linear-gradient(90deg,#f97316,#fb923c);
-  color: #fff;
-  transition: 0.3s;
+  margin-top: 6px;
 }
-.card button:hover { opacity: 0.9; }
+.card button:hover {
+  opacity: 0.9;
+}
 
 /* ---------- TICKET ---------- */
-.ticket .table div { display: grid; grid-template-columns: 2fr 2fr 1fr 1fr; padding: 6px 0; border-bottom: 1px dashed #444; font-size: 14px; }
-.ticket .total { margin-top: 10px; font-weight: 700; font-size: 16px; text-align: right; }
+.ticket .table div {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr;
+  padding: 6px 0;
+  border-bottom: 1px dashed #444;
+  font-size: 14px;
+}
+.ticket .total {
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: right;
+}
 
 /* ---------- PRINT ---------- */
 @media print {
   body * { visibility: hidden; }
   #printTicket, #printTicket * { visibility: visible; }
-  #printTicket { position: absolute; left: 0; top: 0; width: 100%; background: #fff; color: #000; padding: 20px; }
+  #printTicket {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: #fff;
+    color: #000;
+    padding: 20px;
+  }
   button { display: none; }
 }
