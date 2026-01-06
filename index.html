@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<title>Animal POS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Animal POS - Golden King</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -18,40 +18,29 @@
 
 <!-- PANTALLA PRINCIPAL -->
 <div id="mainScreen" style="display:none;">
-
-  <!-- HEADER -->
   <div class="header">
-    <div class="header-buttons">
-      <button id="animalitosTab" class="active">Animalitos</button>
-      <button id="pollaHipicaTab">Polla Hípica</button>
-      <button onclick="salir()" style="background:#ef4444;">Salir</button>
-    </div>
+    <button onclick="salir()">Salir</button>
     <span id="userLabel">Usuario: </span>
     <span id="userTicket" style="margin-left:auto;">Golden King</span>
     <span id="numeroTicket" style="margin-left:10px;">TCK# 000000000</span>
   </div>
 
-  <!-- MAIN -->
   <div class="main">
+    <div class="card" id="sorteos"></div>
 
-    <!-- SECCIÓN ANIMALITOS -->
-    <div class="card animales-section">
-      <h3>Animalitos</h3>
-      <div class="animales" id="animales">
-        <!-- Los animales se generan desde app.js -->
+    <div class="card">
+      <div class="tabs">
+        <button class="active">Animalitos</button>
+        <button>Números</button>
+        <button>Combinación</button>
+        <button>Polla</button>
       </div>
+      <div class="animales" id="animales"></div>
       <input id="animalInput" placeholder="Animales seleccionados" readonly>
       <input id="montoInput" type="number" placeholder="Monto">
       <button onclick="agregar()">Agregar</button>
     </div>
 
-    <!-- SECCIÓN POLLA HÍPICA -->
-    <div class="card polla-hipica-section" style="display:none;">
-      <h3>Polla Hípica</h3>
-      <p>Aquí va la sección de Polla Hípica</p>
-    </div>
-
-    <!-- TICKET -->
     <div class="card ticket">
       <div class="table" id="tabla">
         <div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;font-weight:bold;">
@@ -61,66 +50,14 @@
       <div class="total" id="total">TOTAL BS 0</div>
       <button style="background:#22c55e;" onclick="procesar()">Procesar e Imprimir</button>
     </div>
-
   </div>
 </div>
 
 <div id="printTicket" style="display:none;"></div>
 
-<!-- SCRIPTS -->
 <script src="data/animales.js"></script>
 <script src="data/sorteos.js"></script>
 <script src="js/login.js"></script>
 <script src="js/app.js"></script>
-<script>
-  // ---------- LOGIN ----------
-  const USUARIO = "golden";
-  const CLAVE = "1234";
-
-  function login() {
-    const usuario = document.getElementById("usuarioInput").value.trim();
-    const clave = document.getElementById("claveInput").value.trim();
-    if (usuario !== USUARIO || clave !== CLAVE) {
-      return alert("Usuario o clave incorrecta");
-    }
-
-    document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("mainScreen").style.display = "block";
-    document.getElementById("userLabel").innerText = "Usuario: " + usuario;
-  }
-
-  function salir() {
-    document.getElementById("mainScreen").style.display = "none";
-    document.getElementById("loginScreen").style.display = "block";
-    document.getElementById("usuarioInput").value = "";
-    document.getElementById("claveInput").value = "";
-  }
-
-  // Permitir login con Enter
-  const usuarioInput = document.getElementById("usuarioInput");
-  const claveInput = document.getElementById("claveInput");
-  usuarioInput.addEventListener("keyup", e => { if(e.key==="Enter") login(); });
-  claveInput.addEventListener("keyup", e => { if(e.key==="Enter") login(); });
-
-  // ---------- SWITCH SECCIONES ----------
-  const animalitosTab = document.getElementById("animalitosTab");
-  const pollaHipicaTab = document.getElementById("pollaHipicaTab");
-  const animalesSection = document.querySelector(".animales-section");
-  const pollaHipicaSection = document.querySelector(".polla-hipica-section");
-
-  animalitosTab.addEventListener("click", () => {
-    animalesSection.style.display = "block";
-    pollaHipicaSection.style.display = "none";
-    animalitosTab.classList.add("active");
-    pollaHipicaTab.classList.remove("active");
-  });
-
-  pollaHipicaTab.addEventListener("click", () => {
-    animalesSection.style.display = "none";
-    pollaHipicaSection.style.display = "block";
-    animalitosTab.classList.remove("active");
-    pollaHipicaTab.classList.add("active");
-  });
-</script>
 </body>
 </html>
