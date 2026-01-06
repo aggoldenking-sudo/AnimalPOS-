@@ -67,9 +67,7 @@ body {
   cursor: pointer;
   transition: 0.2s;
 }
-.header-buttons button:hover {
-  opacity: 0.9;
-}
+.header-buttons button:hover { opacity: 0.9; }
 
 /* ---------- MAIN ---------- */
 .main {
@@ -90,32 +88,14 @@ body {
 
 /* ---------- SORTEOS ---------- */
 .sorteo h4 { margin-bottom: 6px; color: #f97316; }
-.horarios {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-.horarios button {
-  padding: 6px 12px;
-  border-radius: 20px;
-  border: 1px solid #ddd;
-  background: #fff;
-  color: #000;
-  cursor: pointer;
-}
-.horarios button.active {
-  background: #f97316;
-  color: #fff;
-  border: none;
-}
+.horarios { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.horarios button { padding: 6px 12px; border-radius: 20px; border: 1px solid #ddd; background: #fff; color: #000; cursor: pointer; }
+.horarios button.active { background: #f97316; color: #fff; border: none; }
 
 /* ---------- ANIMALES ---------- */
 .animales-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  gap: 10px;
-  margin-bottom: 10px;
+  display: block;
+  margin-top: 12px;
 }
 .animal {
   border: 1px solid #f97316;
@@ -124,15 +104,14 @@ body {
   text-align: center;
   cursor: pointer;
   font-size: 14px;
+  margin: 4px;
 }
-.animal.active {
-  background: #f97316;
-  color: #fff;
-}
+.animal.active { background: #f97316; color: #fff; }
 
-/* ---------- POLLA HIPICA (Sección nueva) ---------- */
+/* ---------- POLLA HIPICA ---------- */
 .polla-hipica-section {
   display: none;
+  margin-top: 12px;
   background: #1e293b;
   border-radius: 12px;
   padding: 12px;
@@ -160,32 +139,13 @@ input {
 .card button:hover { opacity: 0.9; }
 
 /* ---------- TICKET ---------- */
-.ticket .table div {
-  display: grid;
-  grid-template-columns: 2fr 2fr 1fr 1fr;
-  padding: 6px 0;
-  border-bottom: 1px dashed #444;
-  font-size: 14px;
-}
-.ticket .total {
-  margin-top: 10px;
-  font-weight: 700;
-  font-size: 16px;
-  text-align: right;
-}
+.ticket .table div { display: grid; grid-template-columns: 2fr 2fr 1fr 1fr; padding: 6px 0; border-bottom: 1px dashed #444; font-size: 14px; }
+.ticket .total { margin-top: 10px; font-weight: 700; font-size: 16px; text-align: right; }
 
 /* ---------- PRINT ---------- */
 @media print {
   body * { visibility: hidden; }
   #printTicket, #printTicket * { visibility: visible; }
-  #printTicket {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    background: #fff;
-    color: #000;
-    padding: 20px;
-  }
+  #printTicket { position: absolute; left: 0; top: 0; width: 100%; background: #fff; color: #000; padding: 20px; }
   button { display: none; }
 }
