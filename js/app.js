@@ -1,105 +1,139 @@
-/* ---------- BOTONES HEADER ---------- */
-const animalitosBtn = document.getElementById("animalitosTab");
-const pollaHipicaBtn = document.getElementById("pollaHipicaTab");
+let sorteoActivo = [];
+let ticketItems = [];
+let total = 0;
+let ticketNumero = 0;
 
-// SECCIONES
-const animalitosSection = document.querySelector(".animales-section");
-const pollaHipicaSection = document.querySelector(".polla-hipica-section");
-
-// MOSTRAR SECCIONES
-animalitosBtn.addEventListener("click", () => {
-  animalitosSection.style.display = "block";
-  pollaHipicaSection.style.display = "none";
-  animalitosBtn.classList.add("active");
-  pollaHipicaBtn.classList.remove("active");
-});
-
-pollaHipicaBtn.addEventListener("click", () => {
-  animalitosSection.style.display = "none";
-  pollaHipicaSection.style.display = "block";
-  pollaHipicaBtn.classList.add("active");
-  animalitosBtn.classList.remove("active");
-});
-
-/* ---------- LISTA DE ANIMALES ---------- */
-const animales = [
-  { numero: "00", nombre: "Ballena" },
-  { numero: "0", nombre: "Delfín" },
-  { numero: "01", nombre: "Carnero" },
-  { numero: "02", nombre: "Toro" },
-  { numero: "03", nombre: "Ciempiés" },
-  { numero: "04", nombre: "Alacrán" },
-  { numero: "05", nombre: "León" },
-  { numero: "06", nombre: "Sapo" },
-  { numero: "07", nombre: "Loro" },
-  { numero: "08", nombre: "Ratón" },
-  { numero: "09", nombre: "Águila" },
-  { numero: "10", nombre: "Tigre" },
-  { numero: "11", nombre: "Gato" },
-  { numero: "12", nombre: "Caballo" },
-  { numero: "13", nombre: "Mono" },
-  { numero: "14", nombre: "Paloma" },
-  { numero: "15", nombre: "Zorro" },
-  { numero: "16", nombre: "Oso" },
-  { numero: "17", nombre: "Pavo" },
-  { numero: "18", nombre: "Burro" },
-  { numero: "19", nombre: "Pescado" },
-  { numero: "20", nombre: "Caimán" },
-  { numero: "21", nombre: "Gallo" },
-  { numero: "22", nombre: "Camello" },
-  { numero: "23", nombre: "Cebra" },
-  { numero: "24", nombre: "Iguana" },
-  { numero: "25", nombre: "Gallina" },
-  { numero: "26", nombre: "Vaca" },
-  { numero: "27", nombre: "Perro" },
-  { numero: "28", nombre: "Zamuro" },
-  { numero: "29", nombre: "Elefante" },
-  { numero: "30", nombre: "Caimán" },
-  { numero: "31", nombre: "Lapa" },
-  { numero: "32", nombre: "Ardilla" },
-  { numero: "33", nombre: "Pato" },
-  { numero: "34", nombre: "Venado" },
-  { numero: "35", nombre: "Jirafa" },
-  { numero: "36", nombre: "Culebra" }
-];
-
-/* ---------- GENERAR ANIMALES ---------- */
-const animalesContainer = document.querySelector(".animales-section .animales");
-animalesContainer.innerHTML = "";
-
-animales.forEach(animal => {
-  const div = document.createElement("div");
-  div.classList.add("animal");
-  div.textContent = `${animal.numero} ${animal.nombre}`;
-  animalesContainer.appendChild(div);
-
-  div.addEventListener("click", () => {
-    const monto = prompt(`Ingrese el monto para ${animal.nombre} (${animal.numero}):`);
-    if (monto && !isNaN(monto)) {
-      div.dataset.monto = monto;
-      div.classList.add("active");
-      agregarTicket(animal.numero, animal.nombre, monto);
-    }
-  });
-});
-
-/* ---------- TICKET ---------- */
-const ticketContainer = document.querySelector(".ticket .table");
-const totalDiv = document.querySelector(".ticket .total");
-
-function agregarTicket(numero, nombre, monto) {
-  const div = document.createElement("div");
-  div.innerHTML = `<strong>${numero} ${nombre}</strong> - Monto: $${monto}`;
-  ticketContainer.appendChild(div);
-  actualizarTotal();
+function generarTicket(){
+  ticketNumero = Math.floor(100000000 + Math.random() * 900000000);
+  document.getElementById("numeroTicket").innerText = "TCK# " + ticketNumero;
 }
 
-function actualizarTotal() {
-  let total = 0;
-  ticketContainer.querySelectorAll("div").forEach(item => {
-    const texto = item.textContent;
-    const match = texto.match(/\$([0-9\.]+)/);
-    if (match) total += parseFloat(match[1]);
+// Render sorteos
+function renderSorteos(){
+  const sDiv = document.getElementById("sorteos");
+  sorteos.forEach(s => {
+    const d = document.createElement("div");
+    d.className = "sorteo";
+    d.innerHTML = `<h4>${s.nombre}</h4>`;
+    const h = document.createElement("div");
+    h.className = "horarios";
+    s.horarios.forEach(hr => {
+      const b = document.createElement("button");
+      b.textContent = hr;
+      b.onclick = () => {
+        const existe = sorteoActivo.find(x => x.nombre === s.nombre && x.horario === hr);
+        if (existe) {
+          sorteoActivo = sorteoActivo.filter(x => !(x.nombre === s.nombre && x.horario === hr));
+          b.classList.remove("active");
+        } else {
+          sorteoActivo.push({nombre:s.nombre, horario:hr});
+          b.classList.add("active");
+        }
+      };
+      h.appendChild(b);
+    });
+    d.appendChild(h);
+    sDiv.appendChild(d);
   });
-  totalDiv.textContent = `Total: $${total}`;
 }
+
+// Render animales
+function renderAnimales(){
+  const aDiv = document.getElementById("animales");
+  animales.forEach(a => {
+    const d = document.createElement("div");
+    d.className = "animal";
+    d.textContent = a;
+    d.onclick = () => {
+      d.classList.toggle("active");
+      actualizarAnimalesSeleccionados();
+    };
+    aDiv.appendChild(d);
+  });
+}
+
+function actualizarAnimalesSeleccionados(){
+  const seleccionados = [];
+  document.querySelectorAll(".animal.active").forEach(a => seleccionados.push(a.textContent));
+  document.getElementById("animalInput").value = seleccionados.join(", ");
+  document.getElementById("montoInput").focus();
+}
+
+document.getElementById("montoInput").addEventListener("keydown", e => {
+  if(e.key==="Enter"){ e.preventDefault(); agregar(); }
+});
+
+function agregar(){
+  if(sorteoActivo.length===0) return alert("Seleccione al menos un sorteo y horario");
+  const animalesInput = document.getElementById("animalInput").value.split(",").map(a=>a.trim()).filter(a=>a);
+  const monto = Number(document.getElementById("montoInput").value);
+  if(!animalesInput.length || !monto) return;
+
+  animalesInput.forEach(animal=>{
+    sorteoActivo.forEach(s=>{
+      ticketItems.push({animal, monto, sorteo: s.nombre, horario: s.horario});
+      const fila = document.createElement("div");
+      fila.style.display="grid";
+      fila.style.gridTemplateColumns="2fr 2fr 1fr 1fr";
+      fila.style.padding="4px 0";
+      fila.style.borderBottom="1px dashed #ccc";
+      fila.innerHTML=`<div>${animal}</div><div>${s.nombre}</div><div>${s.horario}</div><div>${monto}</div>`;
+      document.getElementById("tabla").appendChild(fila);
+      total += monto;
+    });
+  });
+
+  document.getElementById("total").innerText = "TOTAL BS " + total;
+  document.getElementById("animalInput").value="";
+  document.getElementById("montoInput").value="";
+  document.querySelectorAll(".animal").forEach(a=>a.classList.remove("active"));
+}
+
+function procesar(){
+  if(ticketItems.length===0) return alert("Ticket vacío");
+
+  let txt = `AG ${document.getElementById("userTicket").innerText} TQ1\n`;
+  txt += `TCK# ${ticketNumero} SER# ${Math.floor(10000000 + Math.random()*90000000)}\n`;
+  txt += new Date().toLocaleString()+"\n--------------------------------\n";
+
+  let grupos = {};
+  ticketItems.forEach(it=>{
+    const key = it.sorteo+" "+it.horario;
+    if(!grupos[key]) grupos[key]=[];
+    grupos[key].push(it);
+  });
+
+  for(let key in grupos){
+    txt += key + "\n";
+    grupos[key].forEach((it,i)=>{
+      let a = animalesMap.find(x => it.animal.includes(x.nombre));
+      txt += a ? `${a.num}-${a.nombre}x${it.monto} ` : `${it.animal}x${it.monto} `;
+      if((i+1)%3===0) txt+="\n";
+    });
+    txt+="\n";
+  }
+
+  txt += "--------------------------------\n";
+  txt += `MON: ${total},00 (BS) JUG: ${ticketItems.length}\nCADUCA A LOS 3 DIAS\n.`;
+
+  const p = document.getElementById("printTicket");
+  p.innerHTML = `<pre>${txt}</pre>`;
+  p.style.display="block";
+  window.print();
+
+  // limpiar
+  document.getElementById("tabla").innerHTML = `<div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;font-weight:bold;"><div>Animal</div><div>Lotería</div><div>Hora</div><div>Monto</div></div>`;
+  total=0;
+  ticketItems=[];
+  document.getElementById("total").innerText="TOTAL BS 0";
+  document.getElementById("animalInput").value="";
+  document.getElementById("montoInput").value="";
+  document.querySelectorAll(".animal").forEach(a=>a.classList.remove("active"));
+  document.querySelectorAll(".horarios button").forEach(b=>b.classList.remove("active"));
+  sorteoActivo=[];
+  generarTicket();
+}
+
+generarTicket();
+renderSorteos();
+renderAnimales();
