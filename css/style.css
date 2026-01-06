@@ -16,9 +16,7 @@ body {
   text-align: center;
   box-shadow: 0 0 10px #000;
 }
-.login-card h2 {
-  margin-bottom: 20px;
-}
+.login-card h2 { margin-bottom: 20px; }
 .login-card input {
   width: 100%;
   padding: 10px;
@@ -43,20 +41,34 @@ body {
 /* ---------- HEADER ---------- */
 .header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
   padding: 10px;
   background: #020617;
   border-bottom: 1px solid #444;
 }
-.header button {
-  padding: 8px 12px;
-  border: none;
+.header h1 {
+  color: #f97316;
+  font-size: 20px;
+}
+
+/* ---------- HEADER BOTONES ---------- */
+.header-buttons {
+  display: flex;
+  gap: 10px;
+}
+.header-buttons button {
+  padding: 8px 14px;
   border-radius: 10px;
+  border: none;
   background: #f97316;
   color: #fff;
   font-weight: 600;
   cursor: pointer;
+  transition: 0.2s;
+}
+.header-buttons button:hover {
+  opacity: 0.9;
 }
 
 /* ---------- MAIN ---------- */
@@ -77,10 +89,7 @@ body {
 }
 
 /* ---------- SORTEOS ---------- */
-.sorteo h4 {
-  margin-bottom: 6px;
-  color: #f97316;
-}
+.sorteo h4 { margin-bottom: 6px; color: #f97316; }
 .horarios {
   display: flex;
   flex-wrap: wrap;
@@ -101,28 +110,8 @@ body {
   border: none;
 }
 
-/* ---------- TABS ---------- */
-.tabs {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-.tabs button {
-  padding: 6px 12px;
-  border-radius: 20px;
-  border: 1px solid #ddd;
-  background: #fff;
-  color: #000;
-  cursor: pointer;
-}
-.tabs .active {
-  background: #f97316;
-  color: #fff;
-  border: none;
-}
-
 /* ---------- ANIMALES ---------- */
-.animales {
+.animales-section {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
   gap: 10px;
@@ -139,6 +128,14 @@ body {
 .animal.active {
   background: #f97316;
   color: #fff;
+}
+
+/* ---------- POLLA HIPICA (Sección nueva) ---------- */
+.polla-hipica-section {
+  display: none;
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 12px;
 }
 
 /* ---------- INPUT Y BOTONES ---------- */
@@ -160,9 +157,7 @@ input {
   cursor: pointer;
   margin-top: 6px;
 }
-.card button:hover {
-  opacity: 0.9;
-}
+.card button:hover { opacity: 0.9; }
 
 /* ---------- TICKET ---------- */
 .ticket .table div {
