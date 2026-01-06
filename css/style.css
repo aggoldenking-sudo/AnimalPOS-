@@ -1,0 +1,196 @@
+/* ---------- RESET ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: #0f172a;
+  color: #fff;
+}
+
+/* ---------- LOGIN ---------- */
+.login-card {
+  width: 300px;
+  margin: 100px auto;
+  background: #020617;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 10px #000;
+}
+.login-card h2 {
+  margin-bottom: 20px;
+}
+.login-card input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #0f172a;
+  color: #fff;
+}
+.login-card button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #f97316;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---------- HEADER ---------- */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: #020617;
+  border-bottom: 1px solid #444;
+}
+.header button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+  background: #f97316;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---------- MAIN ---------- */
+.main {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 1.5fr;
+  gap: 12px;
+  padding: 12px;
+  height: calc(100vh - 60px);
+}
+
+/* ---------- CARD ---------- */
+.card {
+  background: #1e293b;
+  border-radius: 14px;
+  padding: 14px;
+  overflow: auto;
+}
+
+/* ---------- SORTEOS ---------- */
+.sorteo h4 {
+  margin-bottom: 6px;
+  color: #f97316;
+}
+.horarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.horarios button {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+}
+.horarios button.active {
+  background: #f97316;
+  color: #fff;
+  border: none;
+}
+
+/* ---------- TABS ---------- */
+.tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.tabs button {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+}
+.tabs .active {
+  background: #f97316;
+  color: #fff;
+  border: none;
+}
+
+/* ---------- ANIMALES ---------- */
+.animales {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.animal {
+  border: 1px solid #f97316;
+  border-radius: 10px;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+.animal.active {
+  background: #f97316;
+  color: #fff;
+}
+
+/* ---------- INPUT Y BOTONES ---------- */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 4px 0;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #0f172a;
+  color: #fff;
+}
+.card button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 6px;
+}
+.card button:hover {
+  opacity: 0.9;
+}
+
+/* ---------- TICKET ---------- */
+.ticket .table div {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr;
+  padding: 6px 0;
+  border-bottom: 1px dashed #444;
+  font-size: 14px;
+}
+.ticket .total {
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: right;
+}
+
+/* ---------- PRINT ---------- */
+@media print {
+  body * { visibility: hidden; }
+  #printTicket, #printTicket * { visibility: visible; }
+  #printTicket {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: #fff;
+    color: #000;
+    padding: 20px;
+  }
+  button { display: none; }
+}
